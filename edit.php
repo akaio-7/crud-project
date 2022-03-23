@@ -1,6 +1,17 @@
 <?php
-
 require "connect.php";
+
+$id = $_GET['id'];
+
+$sql = "SELECT * FROM people WHERE id=:id ";
+
+$stmt = $conn->prepare($sql);
+
+$stmt->bindParam(':id', $id);
+
+$stmt->execute();
+
+$person = $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
 $msg = '';
 
@@ -44,12 +55,12 @@ if (isset($_POST['user']) && isset($_POST['email'])) {
         <form method="post" id="mfform">
             <div class="container mb-4">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter Username" name="user">
+                <input type="text" class="form-control" id="username" placeholder="Enter Username" name="user" value="<?= $person->email; ?>" >
             </div>
 
             <div class="container mb-4">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter password" name="email">
+                <input type="email" class="form-control" id="email" placeholder="Enter password" name="email" value="<?= $person['email']; ?>" >
             </div>
 
             <div class="container mb-3">
@@ -73,5 +84,12 @@ $("#mfform").submit(function(){
 
 });
 </script>
+
+
+
+
+
+
+<h1 class="text-danger" ><? print_r($person); ?></h1>
 
 <?php include "footer.php"; ?>

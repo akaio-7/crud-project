@@ -13,7 +13,6 @@ $stmt->execute();
 
 $person = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$msg = '';
 
 if (isset($_POST['user']) && isset($_POST['email'])) {
     
@@ -21,7 +20,7 @@ if (isset($_POST['user']) && isset($_POST['email'])) {
     $email = $_POST['email'];
 
     // sql statement
-    $sql = "INSERT INTO people(username,email) VALUES(:username ,:email)" ;
+    $sql = "UPDATE people SET username=:username ,email=:email where id=:id" ;
 
     // prepare statement
     $stmt = $conn->prepare($sql);
@@ -29,11 +28,12 @@ if (isset($_POST['user']) && isset($_POST['email'])) {
     // bind parameters
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':id', $id);
 
     // execute verification
     if ($stmt->execute()) {
 
-        $msg = 'Mumber created successfully.';
+    $msg = 'Mumber Edited successfully.';
 
     }
 
@@ -46,7 +46,7 @@ if (isset($_POST['user']) && isset($_POST['email'])) {
     <div class="card">
     <div class="card-header">
 
-        <h2>Create a mumber</h2>
+        <h2>Edit infos</h2>
 
     </div>
 
@@ -64,12 +64,12 @@ if (isset($_POST['user']) && isset($_POST['email'])) {
             </div>
 
             <div class="container mb-3">
-                <button type="submit" class="btn btn-success">Create a mumber</button>
+                <button type="submit" class="btn btn-primary">Edit Now</button>
             </div>
         </form>
 
         <div class="container mt-4">
-            <div class="alert alert-success" id="alert" style="display:none;"><strong>Success!</strong> <?php echo $msg ?></div>
+            <div class="alert alert-success" id="alert" style="display:none;"><strong>Success!</strong> <?php echo $msg; ?></div>
         </div>
 
     </div>

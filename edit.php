@@ -34,6 +34,7 @@ if (isset($_POST['user']) && isset($_POST['email'])) {
     if ($stmt->execute()) {
 
     $msg = 'Mumber Edited successfully.';
+    header("Location: index.php");
 
     }
 
@@ -79,7 +80,6 @@ if (isset($_POST['user']) && isset($_POST['email'])) {
 <script>
 $("#mfform").submit(function(){
 
-    $("#alert").removeAttr("style");
     <?php $_POST = null; ?>
 
 });

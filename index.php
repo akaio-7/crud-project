@@ -32,7 +32,7 @@
                                 <td><?= $mumber["email"] ?></td>
                                 <td>
                                     <a href="edit.php?id=<?= $mumber["id"] ?>" class="btn btn-primary" >Edit</a>
-                                    <a href="delete.php?id=<?= $mumber["id"] ?>" class="btn btn-danger" >Delete</a>
+                                    <a onclick="return confirm('Are you sure you want to delete this member ?')" href="delete.php?id=<?= $mumber["id"] ?>" id="delete-btn" class="btn btn-danger" >Delete</a>
                                 </td>
                             </tr>
 
